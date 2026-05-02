@@ -19,9 +19,12 @@ The response body is always JSON:
 
 ```json
 {
-  "status": "healthy"
+  "status": "healthy",
+  "version": "<build-version>"
 }
 ```
+
+The `version` value is injected at build or deploy time and varies by environment.
 
 ## Error responses
 

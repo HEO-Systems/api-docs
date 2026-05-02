@@ -2,8 +2,11 @@
 
 ## `GET /v1/plans`
 
-Returns the full game plan catalog used by the website, including plan specs,
-price, order link, per-plan stock state, and optional game-level sold-out state.
+Returns the full service plan catalog used by the website, including game
+hosting and web hosting plans. Web hosting plans are grouped under the top-
+level `services` map, and game hosting plans are grouped under `games`. The
+response includes plan specs, pricing, order link, per-plan stock state, and
+service-level sold-out state.
 
 ## Method and path
 
@@ -21,6 +24,31 @@ None.
 
 ```json
 {
+  "services": {
+    "webhosting": {
+      "name": "Web Hosting",
+      "soldOut": false,
+      "soldOutMessage": "",
+      "plans": [
+        {
+          "ram": 0,
+          "storage": 10,
+          "price": 0.99,
+          "name": "Starter",
+          "orderLink": "https://clients.heo-systems.com/...",
+          "soldOut": false
+        },
+        {
+          "ram": 0,
+          "storage": 100,
+          "price": 9.99,
+          "name": "100GB",
+          "orderLink": "https://clients.heo-systems.com/...",
+          "soldOut": false
+        }
+      ]
+    }
+  },
   "games": {
     "minecraft": {
       "name": "Minecraft",
@@ -41,7 +69,8 @@ None.
 }
 ```
 
-Sample values are illustrative; availability fields like `soldOut` can vary by game and over time.
+Sample values are illustrative. Availability fields like `soldOut` can vary
+by service and over time.
 
 ## Errors
 
