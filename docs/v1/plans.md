@@ -1,26 +1,21 @@
 # Plan catalog endpoint
 
-## `GET /v1/plans`
+`GET /v1/plans` returns the current service plan catalog used by HEO Systems
+properties.
 
-Returns the full service plan catalog used by the website, including game
-hosting and web hosting plans. Web hosting plans are grouped under the top-
-level `services` map, and game hosting plans are grouped under `games`. The
-response includes plan specs, pricing, order link, per-plan stock state, and
-service-level sold-out state.
+No authentication is required.
 
-## Method and path
+## Request
 
-- Method: `GET`
-- Path: `/v1/plans`
+Send a `GET` request to `/v1/plans`.
 
-## Query params
+```bash
+curl -sS https://api.heo-systems.net/v1/plans
+```
 
-None.
+## Success response (`200 OK`)
 
-## Success response
-
-- Status: `200 OK`
-- Content-Type: `application/json`
+The response body is JSON with top-level `services` and `games` maps.
 
 ```json
 {
@@ -35,14 +30,6 @@ None.
           "storage": 10,
           "price": 0.99,
           "name": "Starter",
-          "orderLink": "https://clients.heo-systems.com/...",
-          "soldOut": false
-        },
-        {
-          "ram": 0,
-          "storage": 100,
-          "price": 9.99,
-          "name": "100GB",
           "orderLink": "https://clients.heo-systems.com/...",
           "soldOut": false
         }
@@ -69,10 +56,11 @@ None.
 }
 ```
 
-Sample values are illustrative. Availability fields like `soldOut` can vary
-by service and over time.
+Sample values are illustrative. Availability can change over time.
 
-## Errors
+## Error responses
 
-- `405 method not allowed` for non-GET requests.
-- Invalid or missing catalog data causes startup failure instead of request-time errors.
+| code | body | when it happens |
+|---|---|---|
+| `405` | text | Method is not `GET` |
+| `429` | text | Rate limit exceeded |

@@ -1,35 +1,25 @@
 # Status widget script endpoint
 
-`GET /v1/heo-status.js` serves a browser widget script that polls the status
-API and displays a toast when services are disrupted or under maintenance.
+`GET /v1/heo-status.js` serves a browser widget script that checks API status
+and shows a toast when services are disrupted or in maintenance.
+
+No authentication is required.
 
 ## Request
 
-Use a standard script include:
+Load the script in your page:
 
 ```html
 <script src="https://api.heo-systems.net/v1/heo-status.js"></script>
 ```
 
-## Response
+## Success response (`200 OK`)
 
-On success, the endpoint returns JavaScript with:
-
-- `Content-Type: application/javascript`
-- Internal polling against `/v1/status` on a 10-second interval
-- A dismissible toast UI appended to `document.body`
+The endpoint returns JavaScript with `Content-Type: application/javascript`.
 
 ## Error responses
-
-This endpoint can return:
 
 | code | body | when it happens |
 |---|---|---|
 | `405` | text | Method is not `GET` |
-| `429` | text | Rate limit exceeded for client IP |
-
-## Operational notes
-
-The script contains hardcoded service URLs for production use. If you need
-environment-specific behavior, use your own wrapper script or host-specific
-build step, then load the API endpoints you need.
+| `429` | text | Rate limit exceeded |

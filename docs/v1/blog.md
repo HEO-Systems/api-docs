@@ -1,24 +1,18 @@
 # Blog endpoints
 
-The blog API exposes two read-only endpoints: one for listing articles and one
-for loading a single article by path.
+The blog API exposes read-only endpoints for listing and loading blog content.
 
 ## `GET /v1/blog/list`
 
-This endpoint returns blog summaries. Results are ordered by `date` descending,
-so newer entries appear first.
+This endpoint returns article summaries ordered by `date` descending.
 
 ### Request
-
-Send a `GET` request:
 
 ```bash
 curl -sS https://api.heo-systems.net/v1/blog/list
 ```
 
 ### Success response (`200 OK`)
-
-The response is a JSON array of article summaries.
 
 ```json
 [
@@ -37,22 +31,20 @@ The response is a JSON array of article summaries.
 
 ### Error responses
 
-This endpoint can return:
-
 | code | body | when it happens |
 |---|---|---|
 | `405` | text | Method is not `GET` |
-| `429` | text | Rate limit exceeded for client IP |
+| `429` | text | Rate limit exceeded |
 | `500` | text | Content source could not be loaded |
 
 ## `GET /v1/blog/article`
 
-This endpoint returns one full blog article, including both Markdown body and
-rendered HTML.
+This endpoint returns one full blog article, including Markdown and rendered
+HTML.
 
 ### Request
 
-Provide the article `path` as a query parameter.
+Pass the article `path` query parameter.
 
 ```bash
 curl -sS "https://api.heo-systems.net/v1/blog/article?path=/blog/company-news/welcome-to-heo-systems-blog"
@@ -65,8 +57,6 @@ curl -sS "https://api.heo-systems.net/v1/blog/article?path=/blog/company-news/we
 | `path` | Yes | Full content path beginning with `/blog/` |
 
 ### Success response (`200 OK`)
-
-The response includes summary fields plus `body` and `html`.
 
 ```json
 {
@@ -85,12 +75,10 @@ The response includes summary fields plus `body` and `html`.
 
 ### Error responses
 
-This endpoint can return:
-
 | code | body | when it happens |
 |---|---|---|
 | `400` | text | `path` query parameter is missing |
 | `404` | text | No blog article matches the given `path` |
 | `405` | text | Method is not `GET` |
-| `429` | text | Rate limit exceeded for client IP |
+| `429` | text | Rate limit exceeded |
 | `500` | text | Content source could not be loaded |
