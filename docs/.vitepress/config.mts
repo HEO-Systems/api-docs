@@ -7,8 +7,8 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'API Docs', link: '/' },
-      { text: 'Status', link: '/v1/status' },
-      { text: 'Health', link: '/v1/health' }
+      { text: 'Status', link: '/v1/monitoring/status' },
+      { text: 'Health', link: '/v1/monitoring/health' }
     ],
 
     sidebar: [
@@ -17,16 +17,34 @@ export default defineConfig({
         items: [{ text: 'API Documentation', link: '/' }]
       },
       {
-        text: 'v1 Endpoints',
+        text: 'Monitoring and service status',
         items: [
-          { text: 'Status', link: '/v1/status' },
-          { text: 'Plans', link: '/v1/plans' },
-          { text: 'Blog', link: '/v1/blog' },
-          { text: 'Knowledge Base', link: '/v1/knowledge-base' },
-          { text: 'Feedback', link: '/v1/feedback' },
-          { text: 'Widget', link: '/v1/widget' },
-          { text: 'Health', link: '/v1/health' }
+          { text: 'Status', link: '/v1/monitoring/status' },
+          { text: 'Health', link: '/v1/monitoring/health' }
         ]
+      },
+      {
+        text: 'Product and pricing data',
+        items: [{ text: 'Plan catalog', link: '/v1/product/plans' }]
+      },
+      {
+        text: 'Content delivery',
+        items: [
+          { text: 'Blog', link: '/v1/content/blog' },
+          { text: 'Knowledge Base', link: '/v1/content/knowledge-base' }
+        ]
+      },
+      {
+        text: 'User feedback intake',
+        items: [{ text: 'Knowledge base feedback', link: '/v1/feedback/feedback' }]
+      },
+      {
+        text: 'Embeddable client assets',
+        items: [{ text: 'Status widget', link: '/v1/embed/widget' }]
+      },
+      {
+        text: 'Customer VPS controls',
+        items: [{ text: 'VPS custom power', link: '/v1/hosting/vps-custom-power' }]
       }
     ]
   }
