@@ -35,7 +35,7 @@ curl -sS https://api.heo-systems.net/v1/blog/list
 |---|---|---|
 | `405` | text | Method is not `GET` |
 | `429` | text | Rate limit exceeded |
-| `500` | text | Content source could not be loaded |
+| `500` | text | Content could not be loaded |
 
 ## `GET /v1/blog/article`
 
@@ -81,4 +81,4 @@ curl -sS "https://api.heo-systems.net/v1/blog/article?path=/blog/company-news/we
 | `404` | text | No blog article matches the given `path` |
 | `405` | text | Method is not `GET` |
 | `429` | text | Rate limit exceeded |
-| `500` | text | Content source could not be loaded |
+| `500` | text | Content could not be loaded |
