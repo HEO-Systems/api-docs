@@ -46,7 +46,7 @@ List results are sorted by `title` ascending.
 |---|---|---|
 | `405` | text | Method is not `GET` |
 | `429` | text | Rate limit exceeded |
-| `500` | text | Content source could not be loaded |
+| `500` | text | Content could not be loaded |
 
 ## `GET /v1/kb/article`
 
@@ -88,4 +88,4 @@ curl -sS "https://api.heo-systems.net/v1/kb/article?path=/knowledgebase/game-ser
 | `404` | text | No article matches the given `path` |
 | `405` | text | Method is not `GET` |
 | `429` | text | Rate limit exceeded |
-| `500` | text | Content source could not be loaded |
+| `500` | text | Content could not be loaded |

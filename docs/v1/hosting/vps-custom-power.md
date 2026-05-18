@@ -2,7 +2,8 @@
 
 These endpoints let you send power actions for customer-scoped VPS instances.
 They use API key authentication and only operate on VPS IDs that are scoped to
-that key.
+that key. Use these endpoints when you need to start, stop, or reset a VPS from
+an external integration.
 
 ## Base path
 
@@ -12,7 +13,8 @@ All endpoints in this page use:
 /v1/hosting/cloud/vps-custom/{id}
 ```
 
-`{id}` is the internal VPS ID from the `vps_servers.id` field.
+`{id}` is the VPS ID shown in your HEO Systems dashboard or returned by an
+authorized integration workflow.
 
 ## Authentication
 
@@ -22,11 +24,11 @@ Send an API key in the `Authorization` header.
 Authorization: Bearer <api_key>
 ```
 
-The API stores only a secure hash of each key. Revoked keys are rejected.
+Revoked API keys are rejected.
 
 ## `POST /v1/hosting/cloud/vps-custom/{id}/start`
 
-This endpoint sends a start action to the VPS provider.
+This endpoint requests a start action for the VPS.
 
 ### Success response (`200 OK`)
 
@@ -35,16 +37,14 @@ This endpoint sends a start action to the VPS provider.
   "success": true,
   "action": "start",
   "vps_id": "vps_123",
-  "provider": "HTZNR-FSN",
-  "provider_server_id": 123456,
   "status": "requested",
-  "message": "Start action sent to hypervisor"
+  "message": "Start action sent"
 }
 ```
 
 ## `POST /v1/hosting/cloud/vps-custom/{id}/stop`
 
-This endpoint sends a stop action to the VPS provider.
+This endpoint requests a stop action for the VPS.
 
 ### Success response (`200 OK`)
 
@@ -53,16 +53,14 @@ This endpoint sends a stop action to the VPS provider.
   "success": true,
   "action": "stop",
   "vps_id": "vps_123",
-  "provider": "HTZNR-FSN",
-  "provider_server_id": 123456,
   "status": "requested",
-  "message": "Stop action sent to hypervisor"
+  "message": "Stop action sent"
 }
 ```
 
 ## `POST /v1/hosting/cloud/vps-custom/{id}/reset`
 
-This endpoint sends a reset action to the VPS provider.
+This endpoint requests a reset action for the VPS.
 
 Reset requires confirmation with `force=true`, either as a query parameter or
 in a JSON request body.
@@ -96,9 +94,9 @@ These endpoints can return:
 | `404` | `not_found` | Endpoint not found |
 | `405` | `method_not_allowed` | Method not allowed |
 | `429` | N/A | Too many requests |
-| `502` | `provider_error` | Failed to send action to hypervisor |
+| `502` | `provider_error` | Failed to send action |
 
 ## Operational notes
 
-Power actions are request-based. A successful response means the action request
-was accepted and sent to the provider API.
+Power actions are request-based. A successful response means the API accepted
+the request. The VPS may take additional time to reach the requested state.
