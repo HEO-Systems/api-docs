@@ -1,12 +1,14 @@
 # API documentation
 
-This directory contains the production API reference for HEO Systems API. It
-covers the public endpoint surface for external integrations, including request
-rules, authentication, response shapes, and safe usage examples.
+This documentation explains how to integrate with HEO Systems API from client
+and server applications. It covers the public endpoint surface for external
+integrations, including request rules, authentication, response shapes, and safe
+usage examples.
 
 ## Version and base path
 
-All API routes in this docset use the `/v1` prefix.
+All versioned API routes in this docset use the `/v1` prefix. The health
+endpoint is not versioned.
 
 Example base URL:
 
@@ -16,8 +18,8 @@ https://api.heo-systems.net/v1
 
 ## Authentication
 
-Most `/v1` endpoints are public. Customer-scoped hosting control endpoints
-require API key authentication.
+Most endpoints in this docset are public. Customer-scoped hosting control
+endpoints require API key authentication.
 
 ## Operational behavior
 
@@ -37,36 +39,38 @@ These endpoint pages are grouped by integration use case.
 
 Use these endpoints for uptime checks and external service visibility.
 
-- [Health endpoint](./v1/health.md): `GET /health`
-- [Status endpoint](./v1/status.md): `GET /v1/status`
+- [Health endpoint](./v1/monitoring/health.md): unversioned `GET /health` (not
+  `/v1/health`)
+- [Status endpoint](./v1/monitoring/status.md): `GET /v1/status`
 
 ### Product and pricing data
 
 Use this endpoint to load public plan metadata in product surfaces.
 
-- [Plan catalog endpoint](./v1/plans.md): `GET /v1/plans`
+- [Plan catalog endpoint](./v1/product/plans.md): `GET /v1/plans`
 
 ### Content delivery
 
 Use these endpoints to list and fetch published blog and knowledge base
 articles.
 
-- [Blog endpoints](./v1/blog.md): `GET /v1/blog/list`, `GET /v1/blog/article`
-- [Knowledge base endpoints](./v1/knowledge-base.md): `GET /v1/kb/list`,
+- [Blog endpoints](./v1/content/blog.md): `GET /v1/blog/list`,
+  `GET /v1/blog/article`
+- [Knowledge base endpoints](./v1/content/knowledge-base.md): `GET /v1/kb/list`,
   `GET /v1/kb/article`
 
 ### User feedback intake
 
 Use this endpoint to collect knowledge base feedback.
 
-- [Knowledge base feedback endpoint](./v1/feedback.md):
+- [Knowledge base feedback endpoint](./v1/feedback/feedback.md):
   `POST /v1/kb/feedback`
 
 ### Embeddable client assets
 
 Use this endpoint to load the hosted status widget script.
 
-- [Status widget script endpoint](./v1/widget.md): `GET /v1/heo-status.js`
+- [Status widget script endpoint](./v1/embed/widget.md): `GET /v1/heo-status.js`
 
 ### Customer VPS controls
 
